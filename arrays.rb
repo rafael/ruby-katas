@@ -14,11 +14,11 @@ class Array
       end
     end
     if array_index < array.size
-      merged_array = merged_array + array.slice(array_index..-1) 
+      merged_array = merged_array + array.slice(array_index..-1)
     end
 
     if self_index < self.size
-      merged_array = merged_array + self.slice(self_index..-1) 
+      merged_array = merged_array + self.slice(self_index..-1)
     end
     merged_array
   end
@@ -30,4 +30,14 @@ class Array
     rigth = self.slice(half+1..-1).merge_sort
     return left.merge(rigth)
   end
+
+  def quick_sort
+    return self if self.size < 2
+    pivot = self[(self.size-1)/2]
+    self.delete(pivot)
+    left = self.inject([]) {|acum, val| acum << val if val < pivot; acum }
+    rigth = self.inject([]) {|acum, val| acum << val if val > pivot; acum }
+    return left.quick_sort + [pivot] + rigth.quick_sort
+  end
 end
+

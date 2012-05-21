@@ -18,4 +18,12 @@ describe "Arrays Exercices" do
       [1,2,-1].merge_sort.must_equal([-1,1,2])
     end
   end
+
+  describe "#quick_sort" do
+    it "sorts an array using quick sort" do
+      [5,4,3,2,1].quick_sort.must_equal([1,2,3,4,5])
+      [1,2,3].quick_sort.must_equal([1,2,3])
+      [1,2,-1].quick_sort.must_equal([-1,1,2])
+    end
+  end
 end
