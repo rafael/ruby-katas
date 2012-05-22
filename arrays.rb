@@ -1,5 +1,20 @@
 require 'ruby-debug'
 class Array
+
+  def recursive_merge(array_b)
+    if self.empty?
+      return array_b
+    elsif array_b.empty? 
+      return self
+    elsif self[0] < array_b[0]
+      new_elem  = self[0]
+      self.delete_at(0)
+      return [new_elem] + recursive_merge(array_b)
+    else
+      return [array_b[0]] + recursive_merge(array_b.slice(1..-1))
+    end
+  end
+
   def merge(array)
     merged_array = []
     self_index = 0
@@ -28,7 +43,7 @@ class Array
     half = (self.size-1)/2
     left = self.slice(0..half).merge_sort
     rigth = self.slice(half+1..-1).merge_sort
-    return left.merge(rigth)
+    return left.recursive_merge(rigth)
   end
 
   def quick_sort
