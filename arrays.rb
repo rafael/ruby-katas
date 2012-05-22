@@ -35,8 +35,8 @@ class Array
     return self if self.size < 2
     pivot = self[(self.size-1)/2]
     self.delete(pivot)
-    left = self.inject([]) {|acum, val| acum << val if val < pivot; acum }
-    rigth = self.inject([]) {|acum, val| acum << val if val > pivot; acum }
+    left = self.select {|val|  val < pivot }
+    rigth = self.select {|val| val > pivot }
     return left.quick_sort + [pivot] + rigth.quick_sort
   end
 end
